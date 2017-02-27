@@ -1,0 +1,37 @@
+{
+  "name": "node-accounting",
+  "version": "0.0.1",
+  "main": "bundle.js",
+  "scripts": {
+    "docker:build": "docker build -t reekoheek/node-accounting .",
+    "docker:shell": "docker run --rm -ti reekoheek/node-accounting sh",
+    "docker:up": "docker run -d --name node-accounting -p 3000:3000 reekoheek/node-accounting",
+    "docker:down": "docker stop node-accounting",
+    "clean": "rm -rf node_modules",
+    "start": "nodemon --harmony-async-await server.js",
+    "test": "mocha --harmony-async-await"
+  },
+  "author": "Ganesha <reekoheek@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bono": "xinix-technology/node-bono#master",
+    "kcors": "^2.2.0",
+    "koa-jwt": "^2.2.2",
+    "koa-static": "^3.0.0",
+    "node-bono-norm": "reekoheek/node-bono-norm#master",
+    "node-fetch": "^1.6.3",
+    "node-ledger": "reekoheek/node-ledger",
+    "node-norm": "xinix-technology/node-norm#master",
+    "node-norm-mysql": "reekoheek/node-norm-mysql"
+  },
+  "devDependencies": {
+    "eslint": "^3.15.0",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-standard": "^2.0.1",
+    "migrate": "^0.2.3",
+    "mocha": "^3.2.0",
+    "nodemon": "^1.11.0",
+    "supertest": "^3.0.0"
+  }
+}
