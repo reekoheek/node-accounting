@@ -8,6 +8,7 @@
     "docker:up": "docker run -d --name node-accounting -p 3000:3000 reekoheek/node-accounting",
     "docker:down": "docker stop node-accounting",
     "clean": "rm -rf node_modules",
+    "db:reset": "rm -rf .tmp",
     "start": "nodemon --harmony-async-await server.js",
     "test": "mocha --harmony-async-await"
   },

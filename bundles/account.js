@@ -20,7 +20,15 @@ class AccountBundle extends BaseBundle {
   }
 
   async init (ctx) {
-    await this.ledger.initAccounts(await ctx.parse());
+    let body = await ctx.parse();
+
+    if (!body || !body.length) {
+      ctx.status = 204;
+      ctx.body = '';
+      return;
+    }
+
+    await this.ledger.initAccounts(body);
   }
 
   async create (ctx) {
@@ -31,17 +39,13 @@ class AccountBundle extends BaseBundle {
       ctx.throw(409);
     }
 
-    try {
-      let entry = this.ledger.newAccount(body);
-      await entry.save();
+    entry = this.ledger.newAccount(body);
+    await entry.save();
 
-      ctx.status = 201;
-      ctx.set('Location', `${ctx.originalUrl}/${entry.code}`);
+    ctx.status = 201;
+    ctx.set('Location', `${ctx.originalUrl}/${entry.code}`);
 
-      return { entry };
-    } catch (err) {
-      ctx.throw(400, err);
-    }
+    return { entry };
   }
 
   async read (ctx) {
@@ -60,15 +64,15 @@ class AccountBundle extends BaseBundle {
       ctx.throw(404);
     }
 
-    try {
-      entry.sync(body);
+    entry.set(body);
 
-      await entry.save();
-
-      return { entry };
-    } catch (err) {
-      ctx.throw(400, err);
+    let changed = await entry.save();
+    if (!changed) {
+      ctx.status = 204;
+      return;
     }
+
+    return { entry };
   }
 
   async transaction (ctx) {
