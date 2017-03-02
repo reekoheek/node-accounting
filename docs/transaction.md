@@ -1,7 +1,7 @@
 # Transaction
 
-URI /transaction
+URI `/transaction`
 
-## GET /
+## `GET /`
 
 List all transactions
