@@ -1,33 +1,39 @@
 # Account
 
-URI /account
+URI `/account`
 
-## GET /
+## `GET /`
 
 List all accounts
 
-## PUT /
+## `PUT /`
 
+```
 BODY [ { code, name, cname, children: [ $account ] } = $account ]
+```
 
 Initialize chart of accounts
 
-## POST /
+## `POST /`
 
+```
 BODY { code, name, cname, parent? }
+```
 
 Add new account
 
-## GET /{code}
+## `GET /{code}`
 
 Get account by code
 
-## PUT /{code}
+## `PUT /{code}`
 
+```
 BODY { code, name, cname, parent? }
+```
 
 Update account by code
 
-## GET /{code}/transaction
+## `GET /{code}/transaction`
 
 List all transactions of account

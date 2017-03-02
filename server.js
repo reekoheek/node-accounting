@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const http = require('http');
 const Bundle = require('bono/bundle');
 const AccountingBundle = require('./bundle');
